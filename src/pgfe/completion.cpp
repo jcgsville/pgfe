@@ -69,7 +69,10 @@ DMITIGR_PGFE_INLINE Completion::Completion(const std::string_view tag)
       end_word_pos = space_before_word_pos - 1;
       space_before_word_pos = tag.find_last_of(space, end_word_pos);
     }
-    tag_ = tag.substr(0, end_word_pos + 1);
+    if (row_count_ >= 0)
+      tag_ = tag.substr(0, end_word_pos + 1);
+    else
+      tag_ = std::string(tag);
   } else
     tag_ = tag;
 
